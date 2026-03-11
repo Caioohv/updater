@@ -4,12 +4,12 @@ async function pullFrom(path = "/home/viier/notes") {
   const pathslices = path.split("/");
   const reponame = pathslices[pathslices.length - 1];
   try {
-    console.log(" - exec pull on repo " + reponame);
+    // console.log(" - exec pull on repo " + reponame);
 
     const repo = await git({ baseDir: path, binary: "git" });
 
-    repo.pull();
-    console.log("   pull successful");
+    const pull = await repo.pull();
+    return pull.summary.changes;
   } catch (err) {
     console.log(`   ${reponame} may not be a repo`);
   }

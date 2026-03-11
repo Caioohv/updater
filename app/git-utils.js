@@ -4,7 +4,7 @@ const committer = require("./committer");
 const checker = require("./checker");
 const puller = require("./puller");
 
-const { toUpdate, toCheckInside } = require("./settings");
+const { toUpdate, toCheckInside, toPullInside } = require("./settings");
 
 async function checkEverythingInside() {
   let reposThatNeedCheck = [];
@@ -37,9 +37,25 @@ async function updateAll() {
 
 async function pullAll() {
   console.log(" [UPDATER] Starting auto pull");
+  let reposThatWillUpdate = [];
   for (elem of toUpdate) {
+    reposThatWillUpdate.push(elem);
     await puller(elem);
   }
+
+  for (elem of toPullInside) {
+    const folders = await fs.readdirSync(elem);
+    for (folder of folders) {
+      let willUpdate = await puller(`${elem}/${folder}`);
+      if (willUpdate)
+        reposThatWillUpdate.push(
+          `${elem}/${folder} - \x1b[34m${willUpdate} files\x1b[0m`,
+        );
+    }
+  }
+
+  console.log("=========== updated: ===========");
+  reposThatWillUpdate.forEach((elem) => console.log(elem));
 }
 
 module.exports = {
@@ -47,5 +63,4 @@ module.exports = {
   checkEverythingInside,
   updateAll,
   pullAll,
-  //todo: auto pull
 };
