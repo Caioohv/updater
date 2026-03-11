@@ -1,3 +1,7 @@
-const committer = require("./committer");
+const gitUtils = require("./app/git-utils");
 
-committer("notes", "/home/viier");
+async function main() {
+  await gitUtils.updateAll();
+}
+
+main();
