@@ -4,7 +4,7 @@ async function checkStatus(path = "/home/viier/notes") {
   const pathslices = path.split("/");
   const reponame = pathslices[pathslices.length - 1];
   try {
-    console.log(" - getting status on repo " + reponame);
+    //console.log(" - getting status on repo " + reponame);
 
     const repo = await git({ baseDir: path, binary: "git" });
     const status = await repo.status();
@@ -23,15 +23,15 @@ async function checkStatus(path = "/home/viier/notes") {
       .forEach((elem) => filesToUpdate.push(elem));
 
     if (filesToUpdate.length > 0) {
-      console.log(
-        `   \x1b[34mpending ${filesToUpdate.length} files here\x1b[0m\n`,
-      );
+      //console.log(
+      //  `   \x1b[34mpending ${filesToUpdate.length} files here\x1b[0m\n`,
+      //);
       return filesToUpdate.length;
     } else {
-      console.log("   nothing pending here");
+      //console.log("   nothing pending here");
     }
   } catch (err) {
-    console.log(`   ${reponame} may not be a repo`);
+    //console.log(`   ${reponame} may not be a repo`);
   }
   return false;
 }
