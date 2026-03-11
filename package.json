@@ -4,9 +4,9 @@
   "description": "i am creating this because i use two pc's and i often forget to push code to github to use in the other pc. this tool allow to push every repository that has changes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
     "pull": "node index.js pull",
-    "push": "node index.js push",
+    "push": "node index.js push"
   },
   "author": "",
   "license": "ISC",
