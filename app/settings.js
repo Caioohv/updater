@@ -2,5 +2,5 @@
 
 module.exports = {
   toUpdate: ["/home/viier/notes"], // commits everything
-  toCheckInside: ["/home/viier/projects"], // reads every folder inside this folder
+  toCheckInside: ["/home/viier/projects", "/home/viier/projects/ifmg/mhealth"], // reads every folder inside this folder
 };
