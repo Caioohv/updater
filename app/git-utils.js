@@ -2,6 +2,7 @@ const fs = require("fs");
 
 const committer = require("./committer");
 const checker = require("./checker");
+const puller = require("./puller");
 
 const { toUpdate, toCheckInside } = require("./settings");
 
@@ -34,9 +35,17 @@ async function updateAll() {
   await this.checkEverythingInside();
 }
 
+async function pullAll() {
+  console.log(" [UPDATER] Starting auto pull");
+  for (elem of toUpdate) {
+    await puller(elem);
+  }
+}
+
 module.exports = {
   autoCommit,
   checkEverythingInside,
   updateAll,
+  pullAll,
   //todo: auto pull
 };

@@ -1,7 +1,13 @@
 const gitUtils = require("./app/git-utils");
 
 async function main() {
-  await gitUtils.updateAll();
+  const args = process.argv;
+
+  for (arg of args) {
+    if (arg == "push") await gitUtils.updateAll();
+
+    if (arg == "pull") await gitUtils.pullAll();
+  }
 }
 
 main();
